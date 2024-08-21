@@ -1,20 +1,13 @@
-import { Card, Container, Row, Col } from "react-bootstrap";
-import RomanceBook from '../data/romance.json'
+import { Card } from "react-bootstrap";
 
-const SingleBook = ({ book }) => {
+const SingleBook = function (props) {
   return (
-    <Container>
-      <Row>
-        <Col xs={12} md={3} className="mt-2">
-          <Card key={book.asin}>
-            <Card.Img variant="success" src={book.img} />
+          <Card className="h-100" key={props.book.asin}>
+            <Card.Img variant="success" className="h-75" src={props.book.img} />
             <Card.Body>
-              <Card.Title>{book.title}</Card.Title>
+              <Card.Title>{props.book.title}</Card.Title>
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
-    </Container>
   );
 };
 

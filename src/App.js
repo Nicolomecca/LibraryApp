@@ -5,7 +5,10 @@ import LibraryNavbar from "./components/LibraryNavbar";
 import LibraryAlert from "./components/LibraryAlert";
 import MyFooter from "./components/MyFooter";
 import AllTheBooks from "./components/AllTheBooks";
-import BookList from "./components/BookList";
+import SingleBook from "./components/SingleBook";
+import romancebook from'./data/romance.json';
+import BookList from'./components/BookList';
+
 function App() {
   return (
     <>
@@ -13,7 +16,8 @@ function App() {
         <LibraryNavbar />
       </header>
       <main>
-        <BookList />
+        {/* <SingleBook book={romancebook[0]}/> */}
+        <BookList ArrayBook={romancebook}/>
         <LibraryAlert />
         <AllTheBooks />
       </main>

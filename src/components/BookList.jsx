@@ -1,19 +1,30 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import SingleBook from './SingleBook';
-import RomanceBooks from '../data/romance.json'; 
+import { Component } from "react";
+import SingleBook from "./SingleBook";
+import { Container,Row,Col,Form } from "react-bootstrap";
+class BookList extends Component {
+    state ={
+        searchValue: '',
+    }
+  render() {
+    return(
+        <Container>
+            <Row>
+                <Col>
+                <Form.Control type='text' placeholder="Cerca Un libro" className='my-4'
+                />
+                </Col>
+            </Row>
+            <Row>
+                {this.props.ArrayBook.map(romancebook => (
+                    <Col xs={12} md={6} lg={3} className='my-4'> 
+                    <SingleBook book={romancebook}/>
+                    </Col>
+                )
+                )}
 
-const BookList = () => {
-  return (
-    <Container>
-      <Row>
-        {RomanceBooks.map((book) => (
-          <Col xs={12} md={12} key={book.asin}>
-            <SingleBook book={book} />
-          </Col>
-        ))}
-      </Row>
-    </Container>
-  );
-};
-
-export default BookList;
+            </Row>
+        </Container>
+    )
+  }
+}
+export default BookList
