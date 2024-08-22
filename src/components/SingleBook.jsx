@@ -1,40 +1,51 @@
-import { Component } from "react";
-import { Card } from "react-bootstrap";
-import CommentArea from "./CommentArea";
+import { Component } from 'react'
+import { Card } from 'react-bootstrap'
+import CommentArea from './CommentArea'
 
 class SingleBook extends Component {
+  // so già che riceverò tra le props di questo componente
+  // "libro", ovvero un singolo elemento dell'array dei libri scifi
+  // props.libro <-- l'oggetto del singolo libro
+
   state = {
     selected: false,
-  };
+  }
+
   render() {
     return (
-      <>
+      <div>
         <Card
-          className={`h-100${
-            this.state.selected ? "border border-2 border-danger" : ""
-          }`}
-          key={this.props.book.asin}
+          // className={this.state.selected ? 'diana border border-2 border-danger' : 'diana'}
+          style={
+            this.state.selected
+              ? {
+                  border: this.state.selected
+                    ? '2px solid red'
+                    : '1px solid gray',
+                }
+              : {}
+          }
         >
           <Card.Img
-            variant="success"
-            className="h-75"
+            variant="top"
             src={this.props.book.img}
             onClick={() => {
               this.setState({
-                selected: !this.state.selected,
-              });
+                selected: !this.state.selected, // sempre l'inverso
+              })
             }}
           />
           <Card.Body>
-            <Card.Title>{this.props.book.title}</Card.Title>
-            {this.state.selected && (
-              <CommentArea comment={this.props.comment} />
-            )}
+            <Card.Title>{this.props.libro.title}</Card.Title>
+            <Card.Text>
+              {this.props.libro.category} - {this.props.libro.price}£
+            </Card.Text>
           </Card.Body>
         </Card>
-      </>
-    );
+        {this.state.selected && <CommentArea asin={this.props.libro.asin} />}
+      </div>
+    )
   }
 }
 
-export default SingleBook;
+export default SingleBook

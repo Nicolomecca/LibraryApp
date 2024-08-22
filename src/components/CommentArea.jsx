@@ -1,53 +1,52 @@
-import { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import CommentList from "./CommentiList";
+import { Component } from 'react'
+import CommentList from './CommentList'
 
 class CommentArea extends Component {
   state = {
-    comment: {},
-  };
-  componentDidMount = () => {
-    this.fetchRating();
-  };
+    comments: [],
+  }
 
-  fetchRating = () => {
-    fetch("https://striveschool-api.herokuapp.com/api/comments/", {
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEzNjMwNGYyNjBjYzAwMTVjYzBkZWYiLCJpYXQiOjE3MjQzMzE4NjEsImV4cCI6MTcyNTU0MTQ2MX0.fajSBGtHoqtte0zHhKXrxQbTyF5tj_tJNcAXBdnEaIA",
-      },
-    })
+  componentDidMount = () => {
+    this.fetchComments()
+  }
+
+  fetchComments = () => {
+    // fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`)
+    fetch(
+      'https://striveschool-api.herokuapp.com/api/comments/' + this.props.asin,
+      {
+        headers: {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEzNjMwNGYyNjBjYzAwMTVjYzBkZWYiLCJpYXQiOjE3MjQzNTg2NjYsImV4cCI6MTcyNTU2ODI2Nn0.P_HgxXnCmgHu2h_1eHtcKrA6kbvxRVCx4pFMOQJGvh0"
+          }
+      }
+    )
       .then((response) => {
         if (response.ok) {
-          return response.json();
+          return response.json()
         } else {
-          throw new Error("la chiamata non è andata a buon fine");
+          throw new Error('errore nel recupero delle recensioni')
         }
       })
-      .then((ObjectOfComment) => {
-        console.log("COMMENTI RECUPERATI DAL SERVER", ObjectOfComment);
+      .then((arrayOfComments) => {
+        console.log(arrayOfComments)
         this.setState({
-          comment: ObjectOfComment,
-        });
+          comments: arrayOfComments, // metto le recensioni da API nello stato
+        })
       })
       .catch((err) => {
-        console.log("ERRORE NEL RECUPERO DATI (internet)?", err);
-      });
-  };
+        console.log(err)
+      })
+  }
+
   render() {
     return (
-      <Container>
-        <Row>
-          <Col>
-          <CommentList comment={this.state.comment} />
-          </Col>
-          <Row>
-            <Col>{/*AddCommenti*/}</Col>
-          </Row>
-        </Row>
-      </Container>
-    );
+      <div>
+        <CommentList comments={this.state.comments} />
+        
+        {/* prop drilling: prendo una prop da sopra, SingleBook, a sotto, AddComment */}
+      </div>
+    )
   }
 }
 
-export default CommentArea;
+export default CommentArea
