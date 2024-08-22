@@ -38,7 +38,7 @@ class CommentArea extends Component {
     return (
       <Container>
         <Row>
-          <Col xs={12} md={6} lg={3}>
+          <Col>
           <CommentList comment={this.state.comment} />
           </Col>
           <Row>

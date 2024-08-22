@@ -8,7 +8,6 @@ import AllTheBooks from "./components/AllTheBooks";
 import SingleBook from "./components/SingleBook";
 import romancebook from'./data/romance.json';
 import BookList from'./components/BookList';
-import CommentArea from "./components/CommentArea";
 function App() {
   return (
     <>
@@ -17,7 +16,7 @@ function App() {
       </header>
       <main>
         {/* <SingleBook book={romancebook[0]}/> */}
-        <CommentArea/>
+
         <BookList ArrayBook={romancebook}/>
         <LibraryAlert />
         <AllTheBooks />

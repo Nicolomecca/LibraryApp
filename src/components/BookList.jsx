@@ -1,6 +1,7 @@
 import { Component } from "react";
 import SingleBook from "./SingleBook";
 import { Container,Row,Col,Form } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 class BookList extends Component {
     state ={
         searchValue: '',
