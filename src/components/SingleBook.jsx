@@ -7,6 +7,7 @@ class SingleBook extends Component {
   }
   render() {
     return (
+      <>
       <Card className={`h-100${this.state.selected? 'border border-2 border-danger' : ''}`} key={this.props.book.asin}>
         <Card.Img variant="success" className="h-75" src={this.props.book.img} 
         onClick={()=>{
@@ -19,6 +20,7 @@ class SingleBook extends Component {
           <Card.Title>{this.props.book.title}</Card.Title>
         </Card.Body>
       </Card>
+      </>
     );
   }
 }
